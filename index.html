@@ -2,30 +2,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Product Management</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/app.css" rel="stylesheet" />
     <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-resource.js"></script>
+    <script src="Scripts/angular-mocks.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+
     <script src="App/app.js"></script>
+  
+
+    <script src="Common/Services/common.services.js"></script>
+    <script src="Common/Services/productResource.js"></script>
+    <script src="Common/Services/productResourceMock.js"></script>
+
+
+    <script src="App/products/productListCtrl.js"></script>
 </head>
-<body ng-app="MainModule">
-    <table ng-init='products=[
-           {
-"productId": 1, "productName": "Leaf Rake", "productCode": "GDN-0011", "releaseDate": "March 19, 2009", "description": "Leaf rake with 48-inch handle.", "cost": 9.00, "price": 19.95, "category": "garden", "tags": [ "leaf", "tool"], "imageUrl": "http://openclipart.org/image/ 300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
-},
-   {
-"productId": 2, "productName": "Leaf Rake2", "productCode": "GDN-0012", "releaseDate": "March 19, 2010", "description": "Leaf rake2 with 48-inch handle.", "cost": 10.00, "price": 20.95, "category": "garden", "tags": [ "leaf", "tool"], "imageUrl": "http://openclipart.org/image/ 300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
-}
-       ]' style="width: 100%;">
-        <thead>
-            <tr><td>Image</td><td>Product</td><td>Code</td><td>Available</td><td>Price</td></tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="product in products">
-                <td><img style="width: 50px; margin: 2px" ng-src="{{product.imageUrl}}" title="{{product.productName}}"></td>
-                <td>{{product.productName}}</td>
-                <td>{{product.productCode}}</td>
-                <td>{{product.releaseDate}}</td>
-                <td>{{product.price|currency}}</td>
-            </tr>
-        </tbody>
-    </table>
+<body ng-app="productManagement">
+<div class="container">
+    <div ui-view></div>
+</div>
+
+    <!--<div class="panel panel-primary">
+        <div class="panel-heading">
+            Product List
+        </div>
+        <div class="panel-body">
+            <table class="table" style="width: 100%;" ng-controller="ProductListCtrl as vm">
+                <thead>
+                    <tr><td><button class="button btn-primary" type="button" ng-click="vm.toggleImage()">{{vm.showImage?"Hide":"Show"}}</button></td><td>Product</td><td>Code</td><td>Available</td><td>Price</td></tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in vm.products">
+                        <td><img style="width: 50px; margin: 2px" ng-if="vm.showImage" ng-src="{{product.imageUrl}}" title="{{product.productName}}"></td>
+                        <td>{{product.productName}}</td>
+                        <td>{{product.productCode}}</td>
+                        <td>{{product.releaseDate}}</td>
+                        <td>{{product.price|currency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>-->
 </body>
 </html>
