@@ -4,7 +4,7 @@
 
     app.config(["$stateProvider","$urlRouterProvider",
         function ($stateProvider, $urlRouterProvider) {
-             $urlRouterProvider.otherwise("/products");
+             $urlRouterProvider.otherwise("/");
             $stateProvider
                 .state("home",
                 {
@@ -17,11 +17,32 @@
                     templateUrl: "app/products/productListView.html",
                     controller: "ProductListCtrl as vm"
                 })
+                //.state("productDetails",
+                //    {
+                //        url: "/products/:productId",
+                //        templateUrl: "app/products/productDetailsView.html",
+                //        controller: "ProductDetailCtrl as vm"  
+                //    })
+
+                
                 .state("productEdit",
                 {
                     url: "/prdoucts/edit/:productId",
                     templateUrl: "app/products/productEditView.html",
                     controller: "ProductEditCtrl as vm"
+                })
+                .state("productDetails", {
+                    url: "/products/:productId",
+                    templateUrl: "app/products/productDetailsView.html",
+                    controller: "ProductDetailCtrl as vm",
+                    resolve: {
+                        productResource: "productResource",
+
+                        product: function (productResource, $stateParams) {
+                            var productId = $stateParams.productId;
+                            return productResource.get({ productId: productId }).$promise;
+                        }
+                    }
                 });
         }]
 
