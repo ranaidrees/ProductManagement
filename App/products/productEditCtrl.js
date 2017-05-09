@@ -1,8 +1,33 @@
 ﻿(function() {
     "use strict";
-    var ProductEditCtrl = function (product,$state) {
+    var ProductEditCtrl = function (product, ProductService, $state) {
         var vm = this;
         vm.product = product;
+        vm.priceOption = "percent";
+        vm.marginPercent = function() { return ProductService.calculateMarginPercent(vm.product.price, vm.product.cost); };
+        //vm.marginPercent = function () {
+        //    return ProductService.calculateMarginPercent(vm.product.price,
+        //        vm.product.cost)
+        //};
+        
+        /* Calculate the price based on a markup */
+        vm.calculatePrice = function () {
+            var price = 0;
+
+            if (vm.priceOption == 'amount') {
+                price = ProductService.calculatePriceFromMarkupAmount(
+                    vm.product.cost, vm.markupAmount);
+            }
+
+            if (vm.priceOption == 'percent') {
+                price = ProductService.calculatePriceFromMarkupPercent(
+                    vm.product.cost, vm.markupPercent);
+            }
+            vm.product.price = price;
+        };
+
+
+
         if (vm.product && vm.product.productId) {
             vm.title = "Edit " + vm.product.productName;
         } else {
@@ -14,7 +39,7 @@
             vm.opened = !vm.opened;
         };
         vm.submit = function(isValid) {
-            if (isvalid) {
+            if (isValid) {
                 vm.product.$save(function(data) {
                     toastr.success("save successful");
                 });
@@ -39,5 +64,5 @@
             vm.product.tags.splice(idx, 1);
         };
     };
-    angular.module("productManagement").controller("ProductEditCtrl", ["product","$state", ProductEditCtrl]);
+    angular.module("productManagement").controller("ProductEditCtrl", ["product", "ProductService", "$state", ProductEditCtrl]);
 }())

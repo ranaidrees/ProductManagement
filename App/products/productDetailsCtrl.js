@@ -1,9 +1,10 @@
 ﻿(function () {
     "use strict";
-    var ProductDetailCtrl = function (product) {
+    var ProductDetailCtrl = function (product, ProductService) {
         var vm = this;
 
         vm.product = product;
+        vm.marginPercent = ProductService.calculateMarginPercent(vm.product.price, vm.product.cost);
 
         vm.title = "Product Detail: " + vm.product.productName;
 
@@ -13,7 +14,7 @@
     }
     angular
         .module("productManagement")
-        .controller("ProductDetailCtrl",["product",
+        .controller("ProductDetailCtrl",["product","ProductService",
             ProductDetailCtrl]);
 
    
