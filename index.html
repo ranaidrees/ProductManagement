@@ -3,14 +3,18 @@
 <head>
     <title>Product Management</title>
     <link href="Content/bootstrap.css" rel="stylesheet" />
-    <link href="Content/app.css" rel="stylesheet" />
+    <link href="Content/app.css" rel="stylesheet"/>
+    <link href="Content/toastr.css" rel="stylesheet"/>
+
     <script src="Scripts/jquery-1.9.1.js"></script>
     <script src="Scripts/angular.js"></script>
     <script src="Scripts/angular-resource.js"></script>
     <script src="Scripts/angular-mocks.js"></script>
     <script src="Scripts/angular-ui-router.js"></script>
     <script src="Scripts/bootstrap.js"></script>
-
+    <script src="Scripts/angular-ui/ui-utils.js"></script>
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/toastr.js"></script>
     <script src="App/app.js"></script>
   
 
@@ -21,6 +25,7 @@
 
     <script src="App/products/productListCtrl.js"></script>
     <script src="App/products/productDetailsCtrl.js"></script>
+    <script src="App/products/productEditCtrl.js"></script>
 </head>
 <body ng-app="productManagement">
 <div class="navbar navbar-inverse">
@@ -37,8 +42,8 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a ui-sref="productList">Product List</a></li>
-                <li><a ui-sref="productEdit({productId:0})"><i class="glyphicon glyphicon-plus"></i>Add Product</a></li>
-                <!--<li><a><i class="glyphicon glyphicon-plus"></i>Add Product</a></li>-->
+                <li><a ui-sref="productEdit.info({productId:0})"><i class="glyphicon glyphicon-plus"></i>Add Product</a></li>
+                
             </ul>
         </div>
     </div>
